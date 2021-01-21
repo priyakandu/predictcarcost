@@ -1,0 +1,117 @@
+{% extends 'base.html'%}
+{%load static%}
+{% block title %}Home{% endblock title %}
+{% block body %}
+<!--output-->
+{% if pred %}
+<div class="alert alert-danger alert-dismissible fade show mb-0 text-center" role="alert">
+    <h3> Predicted price is :{{pred}}</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-center" href="#">carPricePrediction</a>
+    </div>
+</nav>
+<!-- carousel-->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{%static 'img/1.jpeg'%}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{%static 'img/5.jpeg'%}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{%static 'img/8.jpeg'%}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+<!--  form-->
+<div class="container-fluid bg-dark text-warning text-center">
+           
+    <div class="container text-light py-4">
+        <form  method="POST" action="predict" class="row g-3 needs-validation text-center" novalidate>
+            {% csrf_token %}
+            <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip05" class="form-label">How much Kilometre, the car was driven?</label>
+                    <input type="text" class="form-control" id="validationTooltip05" name="kilometre" placeholder=" (in KM)" required>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip05" class="form-label">Current price in the market?(in digits)</label>
+                    <input type="text" class="form-control" id="validationTooltip05" placeholder="00" name="price"  required>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip05" class="form-label">Year of car when it was first bought?</label>
+                    <input type="text" class="form-control" id="validationTooltip05" maxlength="4" name="year" placeholder=" Ex: 2004" required>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip05" class="form-label">Engine (CC)</label>
+                    <input type="text" class="form-control" id="validationTooltip05" name="engine" placeholder="Ex :1200" required>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip05" class="form-label">Enter the Power bhp(kmpl)</label>
+                    <input type="text" class="form-control" id="validationTooltip05" name="power" placeholder="159.78" required>
+                </div>
+              </div>
+            
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip04" class="form-label">Which type of fuel is used?</label>
+                    <select class="form-select" id="validationTooltip04" name="fuel" required>
+                        <option selected value="diesel">Diesel</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="cng">CNG</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip04" class="form-label">Whether the transmission is automatic or manual?</label>
+                    <select class="form-select" id="validationTooltip04" name="transmission" required>
+                        <option selected value="manual">Manual</option>
+                        <option value="automatic">automatic</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="input-group-large position-relative">
+                    <label for="validationTooltip04" class="form-label">Select the Owner Type</label>
+                    <select class="form-select" id="validationTooltip04" name="ownertype" required>
+                        <option selected value="first">First</option>
+                        <option value="second">Second</option>
+                        <option value="third">Third</option>
+                    </select>
+                </div>
+              </div>
+              
+            <div class="col-12">
+                <button class="btn btn-secondary btn-large" type="submit">Predict your car price</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}
