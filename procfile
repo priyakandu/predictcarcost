@@ -1,1 +1,2 @@
 web: gunicorn hello:app
+web: gunicorn predictcarcost.wsgi --log-file -
